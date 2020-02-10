@@ -25,7 +25,7 @@ import org.geogebra.common.util.debug.Log;
 /**
  * API connector for the MARVL restful API
  */
-public class MarvlAPI implements BackendAPI {
+public class MaterialRestAPI implements BackendAPI {
 	/** whether API is available */
 	protected boolean available = true;
 	/** whether availability check request was sent */
@@ -39,7 +39,7 @@ public class MarvlAPI implements BackendAPI {
 	 * @param baseURL
 	 *            URL of the API; endpoints append eg. "/materials" to it
 	 */
-	public MarvlAPI(String baseURL, URLChecker urlChecker) {
+	public MaterialRestAPI(String baseURL, URLChecker urlChecker) {
 		this.baseURL = baseURL;
 		this.urlChecker = urlChecker;
 	}
@@ -91,7 +91,7 @@ public class MarvlAPI implements BackendAPI {
 	 * @throws JSONException
 	 *             if array contains objects other than strings
 	 */
-	static ArrayList<String> stringList(JSONArray classList) throws JSONException {
+	private static ArrayList<String> stringList(JSONArray classList) throws JSONException {
 		ArrayList<String> groups = new ArrayList<>();
 		for (int i = 0; i < classList.length(); i++) {
 			groups.add(classList.getString(i));
@@ -131,9 +131,9 @@ public class MarvlAPI implements BackendAPI {
 					@Override
 					public void onSuccess(String responseStr) {
 						try {
-							MarvlAPI.this.availabilityCheckDone = true;
+							MaterialRestAPI.this.availabilityCheckDone = true;
 
-							MarvlAPI.this.available = true;
+							MaterialRestAPI.this.available = true;
 							user.setShibbolethAuth(true);
 							// Parse the userdata from the response
 							if (!parseUserDataFromResponse(user, responseStr)) {
@@ -142,8 +142,6 @@ public class MarvlAPI implements BackendAPI {
 							}
 
 							op.onEvent(new LoginEvent(user, true, automatic, responseStr));
-
-							// GeoGebraTubeAPID.this.available = false;
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -153,8 +151,8 @@ public class MarvlAPI implements BackendAPI {
 					@Override
 					public void onError(String error) {
 						Log.warn(error);
-						MarvlAPI.this.availabilityCheckDone = true;
-						MarvlAPI.this.available = false;
+						MaterialRestAPI.this.availabilityCheckDone = true;
+						MaterialRestAPI.this.available = false;
 						user.setShibbolethAuth(true);
 						op.onEvent(new LoginEvent(user, false, automatic, null));
 					}

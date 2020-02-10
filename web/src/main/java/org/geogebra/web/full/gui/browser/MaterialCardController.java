@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.geogebra.common.main.MyError.Errors;
 import org.geogebra.common.move.ggtapi.models.Chapter;
-import org.geogebra.common.move.ggtapi.models.MarvlAPI;
+import org.geogebra.common.move.ggtapi.models.MaterialRestAPI;
 import org.geogebra.common.move.ggtapi.models.Material;
 import org.geogebra.common.move.ggtapi.models.Material.MaterialType;
 import org.geogebra.common.util.AsyncOperation;
@@ -225,7 +225,7 @@ public class MaterialCardController {
 				&& onlineFile(getMaterial())) {
 
 			app.getLoginOperation().getGeoGebraTubeAPI().copy(getMaterial(),
-					MarvlAPI.getCopyTitle(app.getLocalization(),
+					MaterialRestAPI.getCopyTitle(app.getLocalization(),
 							material.getTitle()),
 					new MaterialCallback() {
 						@Override

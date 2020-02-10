@@ -56,9 +56,4 @@ public class GgbSettings implements VendorSettings {
 	public Material.MaterialType getTemplateType() {
 		return Material.MaterialType.notesTemplate;
 	}
-
-    @Override
-    public String getAPIBaseUrl() {
-        return "";
-    }
 }

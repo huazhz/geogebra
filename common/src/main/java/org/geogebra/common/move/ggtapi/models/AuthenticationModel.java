@@ -180,4 +180,5 @@ public abstract class AuthenticationModel extends BaseModel {
 		return !stayLoggedOut;
 	}
 
+	public abstract String getEncoded();
 }

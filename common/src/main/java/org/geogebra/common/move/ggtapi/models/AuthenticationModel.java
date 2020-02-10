@@ -20,7 +20,7 @@ public abstract class AuthenticationModel extends BaseModel {
 	/**
 	 * token name for user logged in got back from GGT
 	 */
-	public static String GGB_TOKEN_KEY_NAME = "token";
+	public static final String GGB_TOKEN_KEY_NAME = "token";
 
 	@Override
 	public void onEvent(BaseEvent event) {
@@ -82,15 +82,8 @@ public abstract class AuthenticationModel extends BaseModel {
 	public void onLoginError(GeoGebraTubeUser user) {
 		this.stayLoggedOut = false;
 		if (getLoginToken() != null || user.isShibbolethAuth()) {
-			clearLoginTokenForLogginError();
+			clearLoginToken();
 		}
-	}
-
-	/**
-	 * override this method if another behaviour needed
-	 */
-	public void clearLoginTokenForLogginError() {
-		clearLoginToken();
 	}
 
 	/**

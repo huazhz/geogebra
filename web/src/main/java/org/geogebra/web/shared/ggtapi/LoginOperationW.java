@@ -5,6 +5,7 @@ import org.geogebra.common.main.Feature;
 import org.geogebra.common.move.events.BaseEvent;
 import org.geogebra.common.move.ggtapi.models.GeoGebraTubeUser;
 import org.geogebra.common.move.ggtapi.models.MaterialRestAPI;
+import org.geogebra.common.move.ggtapi.models.MowService;
 import org.geogebra.common.move.ggtapi.operations.BackendAPI;
 import org.geogebra.common.move.ggtapi.operations.LogInOperation;
 import org.geogebra.common.move.views.BaseEventView;
@@ -100,7 +101,7 @@ public class LoginOperationW extends LogInOperation {
 					.empty(app.getArticleElement().getParamBackendURL())) {
 				this.api = new MaterialRestAPI(
 						app.getArticleElement().getParamBackendURL(),
-						new MarvlURLChecker());
+						new MarvlURLChecker(), new MowService());
 			} else {
 				this.api = new GeoGebraTubeAPIW(app.getClientInfo(),
 						app.has(Feature.TUBE_BETA), app.getArticleElement());

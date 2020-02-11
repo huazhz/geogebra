@@ -80,7 +80,7 @@ public class MaterialRestAPITest {
 	}
 
 	private static MaterialRestAPI authAPI() {
-		return new MaterialRestAPI(BASE_URL, null, new MarvlService());
+		return new MaterialRestAPI(BASE_URL, new MarvlService());
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class MaterialRestAPITest {
 	@Test
 	public void testUploadLoggout() {
 		needsAuth();
-		MaterialRestAPI api = new MaterialRestAPI(BASE_URL, null, new MarvlService());
+		MaterialRestAPI api = new MaterialRestAPI(BASE_URL, new MarvlService());
 		UtilFactory.setPrototypeIfNull(new UtilFactoryD());
 		TestMaterialCallback t = new TestMaterialCallback();
 		api.uploadMaterial("", "S", "This should fail",

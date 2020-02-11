@@ -51,9 +51,4 @@ public class GgbSettings implements VendorSettings {
 	public boolean isGraspableMathEnabled() {
 		return true;
 	}
-
-	@Override
-	public Material.MaterialType getTemplateType() {
-		return Material.MaterialType.notesTemplate;
-	}
 }

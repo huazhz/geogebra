@@ -58,9 +58,4 @@ public class MebisSettings implements VendorSettings {
 	public boolean isGraspableMathEnabled() {
 		return false;
 	}
-
-	@Override
-	public Material.MaterialType getTemplateType() {
-		return Material.MaterialType.ggsTemplate;
-	}
 }

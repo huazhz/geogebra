@@ -66,9 +66,4 @@ public interface VendorSettings {
 	*   @return the graspable mode if it's enabled or not
 	 */
 	boolean isGraspableMathEnabled();
-
-	/**
-	 * @return material type for templates (ggb: notes-template, mow: ggs-template)
-	 */
-	Material.MaterialType getTemplateType();
 }

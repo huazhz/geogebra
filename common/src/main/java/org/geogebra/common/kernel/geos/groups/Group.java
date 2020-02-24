@@ -38,6 +38,15 @@ public class Group {
         geosGroup = geos;
     }
 
+    /**
+     * ungroup geos grouped by this group
+     */
+    public void ungroupGeos() {
+        for (GeoElement geo : getGroupedGeos()) {
+            geo.setParentGroup(null);
+        }
+    }
+
     public void setFixed(boolean fixed) {
         isFixed = fixed;
     }

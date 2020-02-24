@@ -211,7 +211,7 @@ public class ContextMenuGeoElementW extends ContextMenuGeoElement
 
 	private void addGroupItems() {
 		GroupItems items = new GroupItems(app);
-		items.addAvailable(wrappedPopup);
+		items.addAvailableItems(wrappedPopup, app);
 	}
 
 	private void addPropertiesItem() {

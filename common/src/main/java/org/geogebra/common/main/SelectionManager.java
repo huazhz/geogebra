@@ -24,6 +24,7 @@ import org.geogebra.common.kernel.geos.GeoNumberValue;
 import org.geogebra.common.kernel.geos.GeoNumeric;
 import org.geogebra.common.kernel.geos.GeoPolyLine;
 import org.geogebra.common.kernel.geos.GeoPolygon;
+import org.geogebra.common.kernel.geos.groups.Group;
 import org.geogebra.common.kernel.implicit.GeoImplicit;
 import org.geogebra.common.kernel.kernelND.GeoConicND;
 import org.geogebra.common.kernel.kernelND.GeoCoordSys;
@@ -86,6 +87,7 @@ public class SelectionManager {
 	private boolean geoToggled = false;
 
 	private ArrayList<GeoElement> tempMoveGeoList;
+	private ArrayList<Group> selectedGroups = new ArrayList<>();
 
 	/**
 	 * @param kernel
@@ -99,6 +101,17 @@ public class SelectionManager {
 		this.listeners.add(listener);
 
 		selectionListeners = new ArrayList<>();
+	}
+
+	/**
+	 * @return list of selected groups
+	 */
+	public ArrayList<Group> getSelectedGroups() {
+		return selectedGroups;
+	}
+
+	public void addGroupToSelection(Group group) {
+		selectedGroups.add(group);
 	}
 
 	/**

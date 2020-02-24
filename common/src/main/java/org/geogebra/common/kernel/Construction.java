@@ -3676,7 +3676,11 @@ public class Construction {
 	}
 
 	public void addGroupToGroupList(Group group) {
-		groups.add(group);
+		getGroups().add(group);
+	}
+
+	public void removeGroupFromGroupList(Group group) {
+		getGroups().remove(group);
 	}
 
 	/**
@@ -3686,5 +3690,14 @@ public class Construction {
 	public void createGroup(ArrayList<GeoElement> geos) {
 		Group group = new Group(geos);
 		addGroupToGroupList(group);
+	}
+
+	/**
+	 * removes the given group from the construction and ungroups the geos of the group
+	 * @param group selected group that should be removed
+	 */
+	public void removeGroup(Group group) {
+		removeGroupFromGroupList(group);
+		group.ungroupGeos();
 	}
 }

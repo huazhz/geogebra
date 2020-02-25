@@ -2,11 +2,9 @@ package org.geogebra.web.full.gui;
 
 import java.util.ArrayList;
 
-import org.geogebra.common.kernel.Construction;
 import org.geogebra.common.kernel.geos.GeoElement;
 import org.geogebra.common.kernel.geos.groups.Group;
 import org.geogebra.common.main.App;
-import org.geogebra.common.main.Localization;
 import org.geogebra.web.full.javax.swing.GPopupMenuW;
 import org.geogebra.web.html5.gui.util.AriaMenuItem;
 
@@ -30,41 +28,55 @@ public class GroupItems {
 	 * @param popup the menu to add items to.
 	 */
 	void addAvailableItems(GPopupMenuW popup, App app) {
-		addGroupItemIfNeeded(popup, app);
-		addUngroupItemIfNeeded(popup, app);
+		addGroupItem(popup, app);
+		addUngroupItem(popup, app);
 	}
 
-	private void addUngroupItemIfNeeded(GPopupMenuW popup, App app) {
+	private void addGroupItem(GPopupMenuW popup, App app) {
+		if (geos.size() >= 2 && hasGeoNotInGroup(app)) {
+			popup.addItem(createGroupItem(app));
+		}
+	}
+
+	private boolean hasGeoNotInGroup(App app) {
+		for (GeoElement geo : geos) {
+			if (geo.getParentGroup() == null) {
+				return true;
+			}
+		}
+		return app.getSelectionManager().getSelectedGroups().size() > 1 ? true : false;
+	}
+
+	private void addUngroupItem(GPopupMenuW popup, App app) {
 		if (!app.getSelectionManager().getSelectedGroups().isEmpty()) {
 			popup.addItem(createUngroupItem(app));
 		}
 	}
 
 	private AriaMenuItem createUngroupItem(final App app) {
-		return new AriaMenuItem(app.getLocalization().getMenu("Ungroup"), false,
+		return new AriaMenuItem(app.getLocalization().getMenu("ContextMenu.Ungroup"), false,
 				new Scheduler.ScheduledCommand() {
 					@Override
 					public void execute() {
-						removeSelectedGroup(app);
+						ungroupGroups(app);
+						app.storeUndoInfo();
 					}
 				});
 	}
 
-	private void removeSelectedGroup(App app) {
-		for (Group group : app.getSelectionManager().getSelectedGroups()) {
-			app.getKernel().getConstruction().removeGroup(group);
+	private void ungroupGroups(App app) {
+		for (GeoElement geo : geos) {
+			Group groupOfGeo = geo.getParentGroup();
+			if (groupOfGeo != null) {
+				app.getKernel().getConstruction().removeGroupFromGroupList(groupOfGeo);
+				app.getSelectionManager().removeGroupeFromSelectedGroups(groupOfGeo);
+				geo.setParentGroup(null);
+			}
 		}
-	}
-
-	private void addGroupItemIfNeeded(GPopupMenuW popup, App app) {
-		if (geos.size() < 2) {
-			return;
-		}
-		popup.addItem(createGroupItem(app));
 	}
 
 	private AriaMenuItem createGroupItem(final App app) {
-		return new AriaMenuItem(app.getLocalization().getMenu("Group"), false,
+		return new AriaMenuItem(app.getLocalization().getMenu("ContextMenu.Group"), false,
 				new Scheduler.ScheduledCommand() {
 			@Override
 			public void execute() {
@@ -74,6 +86,7 @@ public class GroupItems {
 	}
 
 	private void createGroup(App app) {
+		ungroupGroups(app);
 		app.getKernel().getConstruction().createGroup(geos);
 		unfixAll();
 		app.storeUndoInfo();

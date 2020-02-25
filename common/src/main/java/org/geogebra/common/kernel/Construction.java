@@ -3689,15 +3689,7 @@ public class Construction {
 	 */
 	public void createGroup(ArrayList<GeoElement> geos) {
 		Group group = new Group(geos);
+		getApplication().getSelectionManager().addGroupToSelectedGroups(group);
 		addGroupToGroupList(group);
-	}
-
-	/**
-	 * removes the given group from the construction and ungroups the geos of the group
-	 * @param group selected group that should be removed
-	 */
-	public void removeGroup(Group group) {
-		removeGroupFromGroupList(group);
-		group.ungroupGeos();
 	}
 }

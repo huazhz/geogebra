@@ -104,17 +104,6 @@ public class SelectionManager {
 	}
 
 	/**
-	 * @return list of selected groups
-	 */
-	public ArrayList<Group> getSelectedGroups() {
-		return selectedGroups;
-	}
-
-	public void addGroupToSelection(Group group) {
-		selectedGroups.add(group);
-	}
-
-	/**
 	 * Clears selection and selects given geos.
 	 *
 	 * @param geos
@@ -1251,6 +1240,29 @@ public class SelectionManager {
 
 	private AccessibilityManagerInterface getAccessibilityManager() {
 		return kernel.getApplication().getAccessibilityManager();
+	}
+
+	/**
+	 * @return list of selected groups
+	 */
+	public ArrayList<Group> getSelectedGroups() {
+		return selectedGroups;
+	}
+
+	/**
+	 * adds a group to the list of selected groups
+	 * @param selectedGroup group that was selected
+	 */
+	public void addGroupToSelectedGroups(Group selectedGroup) {
+		if (!getSelectedGroups().contains(selectedGroup)) {
+			getSelectedGroups().add(selectedGroup);
+		}
+	}
+
+	public void removeGroupeFromSelectedGroups(Group groupToRemove) {
+		if(getSelectedGroups().contains(groupToRemove)) {
+			getSelectedGroups().remove(groupToRemove);
+		}
 	}
 }
 

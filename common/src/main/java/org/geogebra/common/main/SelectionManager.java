@@ -1259,8 +1259,12 @@ public class SelectionManager {
 		}
 	}
 
+	/**
+	 * remove given group from the list of selected groups
+	 * @param groupToRemove - group that should be deselected
+	 */
 	public void removeGroupeFromSelectedGroups(Group groupToRemove) {
-		if(getSelectedGroups().contains(groupToRemove)) {
+		if (getSelectedGroups().contains(groupToRemove)) {
 			getSelectedGroups().remove(groupToRemove);
 		}
 	}

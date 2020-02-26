@@ -7748,14 +7748,6 @@ public abstract class GeoElement extends ConstructionElement
 		return this instanceof EquationValue;
 	}
 
-	public void setParentGroup(Group parentGroup) {
-		this.parentGroup = parentGroup;
-	}
-
-	public Group getParentGroup() {
-		return parentGroup;
-	}
-
     public void setParentGroup(Group parentGroup) {
         this.parentGroup = parentGroup;
     }

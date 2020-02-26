@@ -134,6 +134,9 @@ public class SelectionManager {
 			for (int i = 0; i < geos.size(); i++) {
 				GeoElement geo = geos.get(i);
 				addSelectedGeo(geo, false, false);
+				if (geo.getParentGroup() != null) {
+					addGroupToSelectedGroups(geo.getParentGroup());
+				}
 			}
 		}
 		kernel.notifyRepaint();
@@ -1149,6 +1152,7 @@ public class SelectionManager {
 		clearSelection(getSelectedPolyhedronList(), false);
 		clearSelection(getSelectedQuadricList(), false);
 		clearSelection(getSelectedQuadricLimitedList(), false);
+		clearSelection(getSelectedGroups(), false);
 	}
 
 	/**

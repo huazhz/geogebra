@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.geogebra.common.kernel.geos.GeoElement;
 import org.geogebra.common.kernel.geos.groups.Group;
 import org.geogebra.common.main.App;
+
 import org.geogebra.web.full.javax.swing.GPopupMenuW;
 import org.geogebra.web.html5.gui.util.AriaMenuItem;
 
@@ -28,14 +29,19 @@ public class GroupItems {
 	 * @param popup the menu to add items to.
 	 */
 	void addAvailableItems(GPopupMenuW popup, App app) {
-		addGroupItem(popup, app);
-		addUngroupItem(popup, app);
+		boolean groupAdded = addGroupItem(popup, app);
+		boolean ungroupAdded = addUngroupItem(popup, app);
+		if (groupAdded || ungroupAdded) {
+			popup.addSeparator();
+		}
 	}
 
-	private void addGroupItem(GPopupMenuW popup, App app) {
+	private boolean addGroupItem(GPopupMenuW popup, App app) {
 		if (geos.size() >= 2 && hasGeoNotInGroup(app)) {
 			popup.addItem(createGroupItem(app));
+			return true;
 		}
+		return false;
 	}
 
 	private boolean hasGeoNotInGroup(App app) {
@@ -47,10 +53,12 @@ public class GroupItems {
 		return app.getSelectionManager().getSelectedGroups().size() > 1 ? true : false;
 	}
 
-	private void addUngroupItem(GPopupMenuW popup, App app) {
+	private boolean addUngroupItem(GPopupMenuW popup, App app) {
 		if (!app.getSelectionManager().getSelectedGroups().isEmpty()) {
 			popup.addItem(createUngroupItem(app));
+			return true;
 		}
+		return false;
 	}
 
 	private AriaMenuItem createUngroupItem(final App app) {
@@ -81,6 +89,7 @@ public class GroupItems {
 			@Override
 			public void execute() {
 				createGroup(app);
+                app.storeUndoInfo();
 			}
 		});
 	}
@@ -89,7 +98,6 @@ public class GroupItems {
 		ungroupGroups(app);
 		app.getKernel().getConstruction().createGroup(geos);
 		unfixAll();
-		app.storeUndoInfo();
 	}
 
 	private void unfixAll() {

@@ -14,21 +14,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GroupManagerTest {
-	private AppCommon app;
 	private GroupManager groupManager;
 	private Construction construction;
 
 	@Before
 	public void setUp() {
 		AwtFactoryCommon factoryCommon = new AwtFactoryCommon();
-		app = new AppCommon(new LocalizationCommon(2), factoryCommon);
+		AppCommon app = new AppCommon(new LocalizationCommon(2), factoryCommon);
 		groupManager = new GroupManager(app);
 		construction = app.getKernel().getConstruction();
 	}
 
 	@Test
 	public void testGeosNotGrupped() {
-		Assert.assertFalse(isGeosInSameGroup(withGivenNumberOfGeos(3)));
+		Assert.assertFalse(isGeosInSameGroup(withGivenNumberOfGeos(2)));
 	}
 
 	private ArrayList<GeoElement> withGivenNumberOfGeos(int count) {
@@ -49,7 +48,7 @@ public class GroupManagerTest {
 	@Test
 	public void testCreateTwoDifferentGroups() {
 		ArrayList<GeoElement> geos1 = withGivenNumberOfGeos(3);
-		ArrayList<GeoElement> geos2 = withGivenNumberOfGeos(3);
+		ArrayList<GeoElement> geos2 = withGivenNumberOfGeos(5);
 		groupManager.createGroup(geos1);
 		groupManager.createGroup(geos2);
 		geos1.addAll(geos2);

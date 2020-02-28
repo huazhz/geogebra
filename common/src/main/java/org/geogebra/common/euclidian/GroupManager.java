@@ -32,13 +32,5 @@ public class GroupManager {
 	 */
 	public void createGroup(ArrayList<GeoElement> geos) {
 		construction.createGroup(geos);
-		unfixAll(geos);
-		app.storeUndoInfo();
-	}
-
-	private void unfixAll(ArrayList<GeoElement> geos) {
-		for (GeoElement geo: geos) {
-			geo.setFixed(false);
-		}
 	}
 }

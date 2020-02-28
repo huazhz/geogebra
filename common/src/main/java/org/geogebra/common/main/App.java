@@ -1,6 +1,15 @@
 package org.geogebra.common.main;
 
-import com.himamis.retex.editor.share.util.Unicode;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Vector;
+
 import org.geogebra.common.GeoGebraConstants;
 import org.geogebra.common.GeoGebraConstants.Platform;
 import org.geogebra.common.awt.GBufferedImage;
@@ -15,6 +24,7 @@ import org.geogebra.common.euclidian.EuclidianController;
 import org.geogebra.common.euclidian.EuclidianHost;
 import org.geogebra.common.euclidian.EuclidianView;
 import org.geogebra.common.euclidian.EuclidianViewInterfaceCommon;
+import org.geogebra.common.euclidian.GroupManager;
 import org.geogebra.common.euclidian.MaskWidgetList;
 import org.geogebra.common.euclidian.draw.DrawDropDownList;
 import org.geogebra.common.euclidian.event.AbstractEvent;
@@ -110,15 +120,7 @@ import org.geogebra.common.util.ToStringConverter;
 import org.geogebra.common.util.debug.Log;
 import org.geogebra.common.util.profiler.FpsProfiler;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Vector;
+import com.himamis.retex.editor.share.util.Unicode;
 
 /**
  * Represents an application window, gives access to views and system stuff
@@ -4251,6 +4253,14 @@ public abstract class App implements UpdateSelection, AppInterface, EuclidianHos
 	 */
 	public void readLater(GeoNumeric geo) {
 		// implemented in AppW
+	}
+
+	/**
+	 *
+	 * @return the Group Manager;
+	 */
+	public GroupManager getGroupManager() {
+		return null;
 	}
 
 	/**

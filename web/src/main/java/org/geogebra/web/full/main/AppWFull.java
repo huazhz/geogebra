@@ -9,6 +9,7 @@ import org.geogebra.common.GeoGebraConstants;
 import org.geogebra.common.euclidian.EmbedManager;
 import org.geogebra.common.euclidian.EuclidianConstants;
 import org.geogebra.common.euclidian.EuclidianController;
+import org.geogebra.common.euclidian.GroupManager;
 import org.geogebra.common.euclidian.MaskWidgetList;
 import org.geogebra.common.euclidian.TextController;
 import org.geogebra.common.euclidian.event.PointerEventType;
@@ -201,6 +202,7 @@ public class AppWFull extends AppW implements HasKeyboard {
 	protected DialogManagerW dialogManager = null;
     private String autosavedMaterial = null;
 	private MaskWidgetList maskWidgets;
+	private GroupManager groupManager = null;
 
 	/**
 	 *
@@ -2128,6 +2130,14 @@ public class AppWFull extends AppW implements HasKeyboard {
 			videoManager = new VideoManagerW(this);
 		}
 		return videoManager;
+	}
+
+	@Override
+	public GroupManager getGroupManager() {
+		if (groupManager == null) {
+			groupManager = new GroupManager(this);
+		}
+		return groupManager;
 	}
 
 	@Override

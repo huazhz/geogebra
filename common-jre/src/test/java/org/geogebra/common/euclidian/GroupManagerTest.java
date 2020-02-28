@@ -1,6 +1,7 @@
 package org.geogebra.common.euclidian;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.geogebra.common.factories.AwtFactoryCommon;
 import org.geogebra.common.jre.headless.AppCommon;
@@ -66,6 +67,13 @@ public class GroupManagerTest {
 			}
 		}
 		return true;
+	}
 
+	@Test
+	public void testGetGroupOf() {
+		ArrayList<GeoElement> geos = withGivenNumberOfGeos(5);
+		groupManager.createGroup(geos);
+		List<GeoElement> result = groupManager.getGeosOf(geos.get(0).getParentGroup());
+		Assert.assertArrayEquals(geos.toArray(), result.toArray());
 	}
 }

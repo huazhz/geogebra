@@ -437,6 +437,7 @@ public abstract class App implements UpdateSelection, AppInterface, EuclidianHos
 	private SettingsUpdater settingsUpdater;
 	private FontCreator fontCreator;
 	private AlgebraOutputFilter algebraOutputFilter;
+	private GroupManager groupManager;
 
 	public static String[] getStrDecimalSpacesAC() {
 		return strDecimalSpacesAC;
@@ -4260,7 +4261,11 @@ public abstract class App implements UpdateSelection, AppInterface, EuclidianHos
 	 * @return the Group Manager;
 	 */
 	public GroupManager getGroupManager() {
-		return null;
+		if (groupManager == null) {
+			groupManager = new GroupManager(this);
+		}
+		return groupManager;
+
 	}
 
 	/**

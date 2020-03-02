@@ -37,14 +37,14 @@ public class GroupItems {
 	}
 
 	private boolean addGroupItem(GPopupMenuW popup, App app) {
-		if (geos.size() >= 2 && hasGeoNotInGroup(app)) {
+		if (geos.size() >= 2 && allGeosNotInSingleGroup(app)) {
 			popup.addItem(createGroupItem(app));
 			return true;
 		}
 		return false;
 	}
 
-	private boolean hasGeoNotInGroup(App app) {
+	private boolean allGeosNotInSingleGroup(App app) {
 		for (GeoElement geo : geos) {
 			if (geo.getParentGroup() == null) {
 				return true;

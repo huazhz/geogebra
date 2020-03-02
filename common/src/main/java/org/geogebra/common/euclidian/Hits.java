@@ -1117,7 +1117,24 @@ public class Hits extends ArrayList<GeoElement> {
 		return null;
 	}
 
-	public final boolean containsGroup(Group group) {
+	/**
+	 * Get hits only that are groupped together or have no group
+	 *
+	 *  @return the groupped geos.
+	 */
+	public Hits getHitsGroupped() {
+		Hits ret = new Hits();
+		for (int i = 0; i < size(); i++) {
+			GeoElement geo = get(i);
+			Group group = geo.getParentGroup();
+			if (group == null || containsGroup(group)) {
+				ret.add(geo);
+			}
+		}
+		return ret;
+	}
+
+	private boolean containsGroup(Group group) {
 		for (GeoElement geo: group.getGroupedGeos()) {
 			if (!contains(geo)) {
 				return false;
@@ -1126,5 +1143,4 @@ public class Hits extends ArrayList<GeoElement> {
 
 		return true;
 	}
-
 }

@@ -7,7 +7,6 @@ import java.util.TreeSet;
 import org.geogebra.common.euclidian.EuclidianView;
 import org.geogebra.common.euclidian.EuclidianViewInterfaceCommon;
 import org.geogebra.common.euclidian.GroupManager;
-import org.geogebra.common.euclidian.Hits;
 import org.geogebra.common.euclidian3D.EuclidianView3DInterface;
 import org.geogebra.common.gui.AccessibilityManagerInterface;
 import org.geogebra.common.gui.view.algebra.AlgebraView.SortMode;
@@ -1245,24 +1244,21 @@ public class SelectionManager {
 		return kernel.getApplication().getAccessibilityManager();
 	}
 
+	/**
+	 * Adds all the geos of the group, that the given geo belongs.
+	 * If geo has no group, it is added to the selection.
+	 *
+	 * @param geo to add with its group
+	 * @param repaint if repaint should needed.
+	 * @param updateSelection if update selection is needed.
+	 */
 	public void addSelectedGeoWithGroup(GeoElement geo, boolean repaint, boolean updateSelection) {
 		Group group = geo.getParentGroup();
 		if (group == null) {
 			addSelectedGeo(geo, repaint, updateSelection);
 		} else {
-			addSelectedGeos(groupManager.getGeosOf(group), repaint);
+			addSelectedGeos(group.getGroupedGeos(), repaint);
 		}
-	}
-
-	public void setSelectedGeosWithGroup(Hits hits, boolean repaint) {
-		ArrayList<GeoElement> geos = new ArrayList<>();
-		for (GeoElement geo: hits) {
-			Group group = geo.getParentGroup();
-			if (group == null|| hits.containsGroup(group)) {
-				geos.add(geo);
-			}
-		}
-		addSelectedGeos(geos, repaint);
 	}
 }
 

@@ -3,7 +3,6 @@ package org.geogebra.web.full.gui;
 import java.util.ArrayList;
 
 import org.geogebra.common.euclidian.GroupManager;
-import org.geogebra.common.kernel.Construction;
 import org.geogebra.common.kernel.geos.GeoElement;
 import org.geogebra.common.main.App;
 import org.geogebra.common.main.Localization;
@@ -20,7 +19,6 @@ import com.google.gwt.core.client.Scheduler;
 public class GroupItems {
 	private final Localization loc;
 	private final GroupManager groupManager;
-	private Construction construction;
 	private ArrayList<GeoElement> geos;
 	private App app;
 
@@ -30,7 +28,6 @@ public class GroupItems {
 	 */
 	GroupItems(App app) {
 		this.loc = app.getLocalization();
-		this.construction = app.getKernel().getConstruction();
 		this.geos = app.getSelectionManager().getSelectedGeos();
 		this.app = app;
 		this.groupManager = app.getGroupManager();

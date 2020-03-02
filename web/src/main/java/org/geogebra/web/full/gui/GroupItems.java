@@ -77,7 +77,6 @@ public class GroupItems {
 			Group groupOfGeo = geo.getParentGroup();
 			if (groupOfGeo != null) {
 				app.getKernel().getConstruction().removeGroupFromGroupList(groupOfGeo);
-				app.getSelectionManager().removeGroupeFromSelectedGroups(groupOfGeo);
 				geo.setParentGroup(null);
 			}
 		}

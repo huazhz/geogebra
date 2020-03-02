@@ -1,6 +1,7 @@
 package org.geogebra.common.main;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TreeSet;
 
@@ -87,7 +88,6 @@ public class SelectionManager {
 	private boolean geoToggled = false;
 
 	private ArrayList<GeoElement> tempMoveGeoList;
-	private ArrayList<Group> selectedGroups = new ArrayList<>();
 
 	/**
 	 * @param kernel
@@ -134,9 +134,6 @@ public class SelectionManager {
 			for (int i = 0; i < geos.size(); i++) {
 				GeoElement geo = geos.get(i);
 				addSelectedGeo(geo, false, false);
-				if (geo.getParentGroup() != null) {
-					addGroupToSelectedGroups(geo.getParentGroup());
-				}
 			}
 		}
 		kernel.notifyRepaint();
@@ -1152,7 +1149,6 @@ public class SelectionManager {
 		clearSelection(getSelectedPolyhedronList(), false);
 		clearSelection(getSelectedQuadricList(), false);
 		clearSelection(getSelectedQuadricLimitedList(), false);
-		clearSelection(getSelectedGroups(), false);
 	}
 
 	/**
@@ -1247,30 +1243,17 @@ public class SelectionManager {
 	}
 
 	/**
-	 * @return list of selected groups
+	 * returns the selected groups
+	 * @return
 	 */
-	public ArrayList<Group> getSelectedGroups() {
+	public HashSet<Group> getSelectedGroups() {
+		HashSet<Group> selectedGroups = new HashSet<>();
+		for (GeoElement geo : selectedGeos) {
+			if (geo.getParentGroup() != null) {
+				selectedGroups.add(geo.getParentGroup());
+			}
+		}
 		return selectedGroups;
-	}
-
-	/**
-	 * adds a group to the list of selected groups
-	 * @param selectedGroup group that was selected
-	 */
-	public void addGroupToSelectedGroups(Group selectedGroup) {
-		if (!getSelectedGroups().contains(selectedGroup)) {
-			getSelectedGroups().add(selectedGroup);
-		}
-	}
-
-	/**
-	 * remove given group from the list of selected groups
-	 * @param groupToRemove - group that should be deselected
-	 */
-	public void removeGroupeFromSelectedGroups(Group groupToRemove) {
-		if (getSelectedGroups().contains(groupToRemove)) {
-			getSelectedGroups().remove(groupToRemove);
-		}
 	}
 }
 

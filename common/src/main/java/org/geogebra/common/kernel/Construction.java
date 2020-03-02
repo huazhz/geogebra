@@ -3687,7 +3687,6 @@ public class Construction {
 	 */
 	public void createGroup(ArrayList<GeoElement> geos) {
 		Group group = new Group(geos);
-		getApplication().getSelectionManager().addGroupToSelectedGroups(group);
 		addGroupToGroupList(group);
 	}
 }

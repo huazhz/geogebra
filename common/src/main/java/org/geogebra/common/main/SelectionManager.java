@@ -1243,8 +1243,8 @@ public class SelectionManager {
 	}
 
 	/**
-	 * returns the selected groups
-	 * @return
+	 * Finds the groups os selected goes
+	 * @return groups of selected geos
 	 */
 	public HashSet<Group> getSelectedGroups() {
 		HashSet<Group> selectedGroups = new HashSet<>();

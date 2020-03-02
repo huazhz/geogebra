@@ -34,7 +34,9 @@ public class GroupManagerTest {
 	private ArrayList<GeoElement> withGivenNumberOfGeos(int count) {
 		ArrayList<GeoElement> geos = new ArrayList<>();
 		for (int i = 0; i < count; i++ ) {
-			geos.add(new GeoPolygon(construction));
+			GeoPolygon polygon = new GeoPolygon(construction);
+			polygon.setLabel("label" + i);
+			geos.add(polygon);
 		}
 		return geos;
 	}

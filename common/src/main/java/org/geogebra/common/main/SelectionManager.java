@@ -25,6 +25,7 @@ import org.geogebra.common.kernel.geos.GeoNumberValue;
 import org.geogebra.common.kernel.geos.GeoNumeric;
 import org.geogebra.common.kernel.geos.GeoPolyLine;
 import org.geogebra.common.kernel.geos.GeoPolygon;
+import org.geogebra.common.kernel.geos.groups.Group;
 import org.geogebra.common.kernel.implicit.GeoImplicit;
 import org.geogebra.common.kernel.kernelND.GeoConicND;
 import org.geogebra.common.kernel.kernelND.GeoCoordSys;
@@ -1243,9 +1244,13 @@ public class SelectionManager {
 		return kernel.getApplication().getAccessibilityManager();
 	}
 
-	public void selectGroupOf(GeoElement geo) {
-		ArrayList<GeoElement> geos = groupManager.getGeosOf(geo.getParentGroup());
-		addSelectedGeos(geos, true);
+	public void addSelectedGeoWithGroup(GeoElement geo, boolean repaint, boolean updateSelection) {
+		Group group = geo.getParentGroup();
+		if (group == null) {
+			addSelectedGeo(geo, repaint, updateSelection);
+		} else {
+			addSelectedGeos(groupManager.getGeosOf(group), repaint);
+		}
 	}
 }
 

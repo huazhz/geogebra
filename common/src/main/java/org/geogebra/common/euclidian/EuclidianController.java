@@ -8164,7 +8164,7 @@ public abstract class EuclidianController implements SpecialPointsListener {
 									&& !e.isRightClick()) {
 								selection.clearSelectedGeos(geo == null, false);
 								selection.updateSelection(false);
-								selection.addSelectedGeo(geo, true, true);
+								selection.addSelectedGeoWithGroup(geo, true, true);
 							}
 						}
 					}

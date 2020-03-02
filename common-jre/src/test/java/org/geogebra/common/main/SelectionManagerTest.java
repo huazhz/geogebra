@@ -52,11 +52,18 @@ public class SelectionManagerTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void selectGroupOfAGeo() {
+	public void selectAllIfGeoHasGroup() {
 		ArrayList<GeoElement> geos = geosForGroup();
 		getKernel().getConstruction().createGroup(geos);
-		selectionManager.selectGroupOf(geos.get(0));
+		selectionManager.addSelectedGeoWithGroup(geos.get(0), false, false);
 		Assert.assertArrayEquals(geos.toArray(), selectionManager.getSelectedGeos().toArray());
+	}
+
+	@Test
+	public void selectGeoIfNoGroup() {
+		GeoElement geo = new GeoPolygon(getKernel().getConstruction());
+		selectionManager.addSelectedGeoWithGroup(geo, false, false);
+		Assert.assertArrayEquals(new GeoElement[] {geo}, selectionManager.getSelectedGeos().toArray());
 	}
 
 

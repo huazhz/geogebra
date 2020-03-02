@@ -10,6 +10,7 @@ import org.geogebra.common.kernel.Construction;
 import org.geogebra.common.kernel.geos.GeoElement;
 import org.geogebra.common.kernel.geos.GeoPolygon;
 import org.geogebra.common.kernel.geos.groups.Group;
+import org.geogebra.common.main.SelectionManager;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +18,14 @@ import org.junit.Test;
 public class GroupManagerTest {
 	private GroupManager groupManager;
 	private Construction construction;
+	private SelectionManager selection;
 
 	@Before
 	public void setUp() {
 		AwtFactoryCommon factoryCommon = new AwtFactoryCommon();
 		AppCommon app = new AppCommon(new LocalizationCommon(2), factoryCommon);
 		groupManager = new GroupManager(app);
+		selection = app.getSelectionManager();
 		construction = app.getKernel().getConstruction();
 	}
 

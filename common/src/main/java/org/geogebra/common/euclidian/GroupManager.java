@@ -1,8 +1,6 @@
 package org.geogebra.common.euclidian;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import org.geogebra.common.kernel.Construction;
 import org.geogebra.common.kernel.geos.GeoElement;
@@ -41,17 +39,14 @@ public class GroupManager {
 	 * @param group to retrieve geos from.
 	 * @return geos of the group
 	 */
-	public List<GeoElement> getGeosOf(Group group) {
-		if (group == null) {
-			return Collections.emptyList();
-		}
-
-		List<GeoElement> geos = new ArrayList<>();
+	public ArrayList<GeoElement> getGeosOf(Group group) {
+		ArrayList<GeoElement> geos = new ArrayList<>();
 		for (GeoElement geo: construction.getGeoSetConstructionOrder()) {
 			if (geo.getParentGroup() == group) {
 				geos.add(geo);
 			}
 		}
+
 		return geos;
 	}
 }

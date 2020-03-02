@@ -40,13 +40,6 @@ public class GroupManager {
 	 * @return geos of the group
 	 */
 	public ArrayList<GeoElement> getGeosOf(Group group) {
-		ArrayList<GeoElement> geos = new ArrayList<>();
-		for (GeoElement geo: construction.getGeoSetConstructionOrder()) {
-			if (geo.getParentGroup() == group) {
-				geos.add(geo);
-			}
-		}
-
-		return geos;
+		return group.getGroupedGeos();
 	}
 }

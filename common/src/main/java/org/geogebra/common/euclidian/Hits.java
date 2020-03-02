@@ -26,6 +26,7 @@ import org.geogebra.common.kernel.geos.GeoList;
 import org.geogebra.common.kernel.geos.GeoNumeric;
 import org.geogebra.common.kernel.geos.GeoPolygon;
 import org.geogebra.common.kernel.geos.TestGeo;
+import org.geogebra.common.kernel.geos.groups.Group;
 import org.geogebra.common.kernel.kernelND.GeoAxisND;
 import org.geogebra.common.kernel.kernelND.GeoConicND;
 import org.geogebra.common.kernel.kernelND.GeoCoordSys2D;
@@ -1114,6 +1115,16 @@ public class Hits extends ArrayList<GeoElement> {
 		}
 
 		return null;
+	}
+
+	public final boolean containsGroup(Group group) {
+		for (GeoElement geo: group.getGroupedGeos()) {
+			if (!contains(geo)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

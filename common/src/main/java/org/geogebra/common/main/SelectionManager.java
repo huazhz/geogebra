@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import org.geogebra.common.euclidian.EuclidianView;
 import org.geogebra.common.euclidian.EuclidianViewInterfaceCommon;
 import org.geogebra.common.euclidian.GroupManager;
+import org.geogebra.common.euclidian.Hits;
 import org.geogebra.common.euclidian3D.EuclidianView3DInterface;
 import org.geogebra.common.gui.AccessibilityManagerInterface;
 import org.geogebra.common.gui.view.algebra.AlgebraView.SortMode;
@@ -1251,6 +1252,17 @@ public class SelectionManager {
 		} else {
 			addSelectedGeos(groupManager.getGeosOf(group), repaint);
 		}
+	}
+
+	public void setSelectedGeosWithGroup(Hits hits, boolean repaint) {
+		ArrayList<GeoElement> geos = new ArrayList<>();
+		for (GeoElement geo: hits) {
+			Group group = geo.getParentGroup();
+			if (group == null|| hits.containsGroup(group)) {
+				geos.add(geo);
+			}
+		}
+		addSelectedGeos(geos, repaint);
 	}
 }
 

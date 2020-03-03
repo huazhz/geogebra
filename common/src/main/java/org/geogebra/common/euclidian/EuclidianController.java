@@ -8162,9 +8162,9 @@ public abstract class EuclidianController implements SpecialPointsListener {
 						} else {
 							if (view.getSelectionRectangle() == null
 									&& !e.isRightClick()) {
-								selection.clearSelectedGeos(geo == null, false);
+								selection.clearSelectedGeos(false, false);
 								selection.updateSelection(false);
-								selection.addSelectedGeoWithGroup(geo, true, true);
+								selection.addSelectedGeoWithGroup(geo);
 							}
 						}
 					}

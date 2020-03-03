@@ -1261,15 +1261,13 @@ public class SelectionManager {
 	 * If geo has no group, it is added to the selection.
 	 *
 	 * @param geo to add with its group
-	 * @param repaint if repaint should needed.
-	 * @param updateSelection if update selection is needed.
 	 */
-	public void addSelectedGeoWithGroup(GeoElement geo, boolean repaint, boolean updateSelection) {
+	public void addSelectedGeoWithGroup(GeoElement geo) {
 		Group group = geo.getParentGroup();
 		if (group == null) {
-			addSelectedGeo(geo, repaint, updateSelection);
+			addSelectedGeo(geo, true, true);
 		} else {
-			addSelectedGeos(group.getGroupedGeos(), repaint);
+			addSelectedGeos(group.getGroupedGeos(), true);
 		}
 	}
 }

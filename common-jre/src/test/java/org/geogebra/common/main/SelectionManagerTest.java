@@ -55,21 +55,21 @@ public class SelectionManagerTest extends BaseUnitTest {
 	public void selectAllIfGeoHasGroup() {
 		ArrayList<GeoElement> geos = geosForGroup();
 		getKernel().getConstruction().createGroup(geos);
-		selectionManager.addSelectedGeoWithGroup(geos.get(0), false, false);
+		selectionManager.addSelectedGeoWithGroup(geos.get(0));
 		Assert.assertArrayEquals(geos.toArray(), selectionManager.getSelectedGeos().toArray());
 	}
 
 	@Test
 	public void selectGeoIfNoGroup() {
 		GeoElement geo = new GeoPolygon(getKernel().getConstruction());
-		selectionManager.addSelectedGeoWithGroup(geo, false, false);
-		Assert.assertArrayEquals(new GeoElement[] {geo}, selectionManager.getSelectedGeos().toArray());
+		selectionManager.addSelectedGeoWithGroup(geo);
+		Assert.assertArrayEquals(new GeoElement[] {geo},
+				selectionManager.getSelectedGeos().toArray());
 	}
-
 
 	private ArrayList<GeoElement> geosForGroup() {
 		ArrayList<GeoElement> geos = new ArrayList<>();
-		for (int i = 0; i < 5; i++ ) {
+		for (int i = 0; i < 5; i++) {
 			GeoPolygon polygon = new GeoPolygon(getKernel().getConstruction());
 			polygon.setLabel("label" + i);
 			geos.add(polygon);

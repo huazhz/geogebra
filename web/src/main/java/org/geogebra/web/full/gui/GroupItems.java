@@ -15,12 +15,14 @@ import com.google.gwt.core.client.Scheduler;
  * Class to create group related menu items.
  */
 public class GroupItems {
+	private App app;
 	private ArrayList<GeoElement> geos;
 
 	/**
 	 * Constructor for adding Group/Ungroup menu items
 	 */
 	GroupItems(App app) {
+		this.app = app;
 		this.geos = app.getSelectionManager().getSelectedGeos();
 	}
 
@@ -28,23 +30,23 @@ public class GroupItems {
 	 * Add items that are available to currently selected geos.
 	 * @param popup the menu to add items to.
 	 */
-	void addAvailableItems(GPopupMenuW popup, App app) {
-		boolean groupAdded = addGroupItem(popup, app);
-		boolean ungroupAdded = addUngroupItem(popup, app);
+	void addAvailableItems(GPopupMenuW popup) {
+		boolean groupAdded = addGroupItem(popup);
+		boolean ungroupAdded = addUngroupItem(popup);
 		if (groupAdded || ungroupAdded) {
 			popup.addSeparator();
 		}
 	}
 
-	private boolean addGroupItem(GPopupMenuW popup, App app) {
-		if (geos.size() >= 2 && allGeosNotInSingleGroup(app)) {
-			popup.addItem(createGroupItem(app));
+	private boolean addGroupItem(GPopupMenuW popup) {
+		if (geos.size() >= 2 && allGeosNotInSingleGroup()) {
+			popup.addItem(createGroupItem());
 			return true;
 		}
 		return false;
 	}
 
-	private boolean allGeosNotInSingleGroup(App app) {
+	private boolean allGeosNotInSingleGroup() {
 		for (GeoElement geo : geos) {
 			if (geo.getParentGroup() == null) {
 				return true;
@@ -53,26 +55,26 @@ public class GroupItems {
 		return app.getSelectionManager().getSelectedGroups().size() > 1 ? true : false;
 	}
 
-	private boolean addUngroupItem(GPopupMenuW popup, App app) {
+	private boolean addUngroupItem(GPopupMenuW popup) {
 		if (!app.getSelectionManager().getSelectedGroups().isEmpty()) {
-			popup.addItem(createUngroupItem(app));
+			popup.addItem(createUngroupItem());
 			return true;
 		}
 		return false;
 	}
 
-	private AriaMenuItem createUngroupItem(final App app) {
+	private AriaMenuItem createUngroupItem() {
 		return new AriaMenuItem(app.getLocalization().getMenu("ContextMenu.Ungroup"), false,
 				new Scheduler.ScheduledCommand() {
 					@Override
 					public void execute() {
-						ungroupGroups(app);
+						ungroupGroups();
 						app.storeUndoInfo();
 					}
 				});
 	}
 
-	private void ungroupGroups(App app) {
+	private void ungroupGroups() {
 		for (GeoElement geo : geos) {
 			Group groupOfGeo = geo.getParentGroup();
 			if (groupOfGeo != null) {
@@ -82,19 +84,19 @@ public class GroupItems {
 		}
 	}
 
-	private AriaMenuItem createGroupItem(final App app) {
+	private AriaMenuItem createGroupItem() {
 		return new AriaMenuItem(app.getLocalization().getMenu("ContextMenu.Group"), false,
 				new Scheduler.ScheduledCommand() {
 			@Override
 			public void execute() {
-				createGroup(app);
-                app.storeUndoInfo();
+				createGroup();
+				app.storeUndoInfo();
 			}
 		});
 	}
 
-	private void createGroup(App app) {
-		ungroupGroups(app);
+	private void createGroup() {
+		ungroupGroups();
 		app.getKernel().getConstruction().createGroup(geos);
 		unfixAll();
 	}

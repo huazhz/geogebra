@@ -7752,7 +7752,7 @@ public abstract class GeoElement extends ConstructionElement
 		this.parentGroup = parentGroup;
 	}
 
-    public Group getParentGroup() {
-        return parentGroup;
-    }
+	public Group getParentGroup() {
+		return parentGroup;
+	}
 }

@@ -24,7 +24,6 @@ import org.geogebra.common.euclidian.EuclidianController;
 import org.geogebra.common.euclidian.EuclidianHost;
 import org.geogebra.common.euclidian.EuclidianView;
 import org.geogebra.common.euclidian.EuclidianViewInterfaceCommon;
-import org.geogebra.common.euclidian.GroupManager;
 import org.geogebra.common.euclidian.MaskWidgetList;
 import org.geogebra.common.euclidian.draw.DrawDropDownList;
 import org.geogebra.common.euclidian.event.AbstractEvent;
@@ -437,7 +436,6 @@ public abstract class App implements UpdateSelection, AppInterface, EuclidianHos
 	private SettingsUpdater settingsUpdater;
 	private FontCreator fontCreator;
 	private AlgebraOutputFilter algebraOutputFilter;
-	private GroupManager groupManager;
 
 	public static String[] getStrDecimalSpacesAC() {
 		return strDecimalSpacesAC;
@@ -4254,18 +4252,6 @@ public abstract class App implements UpdateSelection, AppInterface, EuclidianHos
 	 */
 	public void readLater(GeoNumeric geo) {
 		// implemented in AppW
-	}
-
-	/**
-	 *
-	 * @return the Group Manager;
-	 */
-	public GroupManager getGroupManager() {
-		if (groupManager == null) {
-			groupManager = new GroupManager(this);
-		}
-		return groupManager;
-
 	}
 
 	/**

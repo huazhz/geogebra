@@ -14,15 +14,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GroupManagerTest {
-	private GroupManager groupManager;
+public class GroupTest {
 	private Construction construction;
 
 	@Before
 	public void setUp() {
 		AwtFactoryCommon factoryCommon = new AwtFactoryCommon();
 		AppCommon app = new AppCommon(new LocalizationCommon(2), factoryCommon);
-		groupManager = new GroupManager(app);
 		construction = app.getKernel().getConstruction();
 	}
 
@@ -44,7 +42,7 @@ public class GroupManagerTest {
 	@Test
 	public void testCreateGroup() {
 		ArrayList<GeoElement> geos = withGivenNumberOfGeos(3);
-		groupManager.createGroup(geos);
+		construction.createGroup(geos);
 		Assert.assertTrue(isGeosInSameGroup(geos));
 	}
 
@@ -52,8 +50,8 @@ public class GroupManagerTest {
 	public void testCreateTwoDifferentGroups() {
 		ArrayList<GeoElement> geos1 = withGivenNumberOfGeos(3);
 		ArrayList<GeoElement> geos2 = withGivenNumberOfGeos(5);
-		groupManager.createGroup(geos1);
-		groupManager.createGroup(geos2);
+		construction.createGroup(geos1);
+		construction.createGroup(geos2);
 		geos1.addAll(geos2);
 		Assert.assertFalse(isGeosInSameGroup(geos1));
 	}
@@ -72,10 +70,10 @@ public class GroupManagerTest {
 	}
 
 	@Test
-	public void testGetGroupOf() {
+	public void testGrouppedGeos() {
 		ArrayList<GeoElement> geos = withGivenNumberOfGeos(5);
-		groupManager.createGroup(geos);
-		List<GeoElement> result = groupManager.getGeosOf(geos.get(0).getParentGroup());
+		Group group = new Group(geos);
+		List<GeoElement> result = group.getGroupedGeos();
 		Assert.assertArrayEquals(geos.toArray(), result.toArray());
 	}
 }

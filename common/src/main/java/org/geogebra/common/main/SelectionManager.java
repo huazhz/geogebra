@@ -6,7 +6,6 @@ import java.util.TreeSet;
 
 import org.geogebra.common.euclidian.EuclidianView;
 import org.geogebra.common.euclidian.EuclidianViewInterfaceCommon;
-import org.geogebra.common.euclidian.GroupManager;
 import org.geogebra.common.euclidian3D.EuclidianView3DInterface;
 import org.geogebra.common.gui.AccessibilityManagerInterface;
 import org.geogebra.common.gui.view.algebra.AlgebraView.SortMode;
@@ -54,7 +53,6 @@ public class SelectionManager {
 	private final Kernel kernel;
 
 	private final ArrayList<UpdateSelection> listeners;
-	private final GroupManager groupManager;
 
 	private ArrayList<GeoElementSelectionListener> selectionListeners;
 
@@ -102,7 +100,6 @@ public class SelectionManager {
 		this.listeners.add(listener);
 
 		selectionListeners = new ArrayList<>();
-		groupManager = kernel.getApplication().getGroupManager();
 	}
 
 	/**

@@ -8164,7 +8164,7 @@ public abstract class EuclidianController implements SpecialPointsListener {
 									&& !e.isRightClick()) {
 								selection.clearSelectedGeos(geo == null, false);
 								selection.updateSelection(false);
-								selection.addSelectedGeo(geo, true, true);
+								selection.addSelectedGeoWithGroup(geo, true, true);
 							}
 						}
 					}
@@ -9715,7 +9715,7 @@ public abstract class EuclidianController implements SpecialPointsListener {
 					view.setSelectionRectangle(null);
 					// hit found
 					if (hits != null && hits.size() > 0) {
-						selection.setSelectedGeos(hits, true);
+						selection.addSelectedGeos(hits.getHitsGroupped(), true);
 						updateBoundingBoxFromSelection(false);
 					}
 				}

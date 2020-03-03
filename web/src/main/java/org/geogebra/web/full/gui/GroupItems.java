@@ -15,8 +15,8 @@ import com.google.gwt.core.client.Scheduler;
  * Class to create group related menu items.
  */
 public class GroupItems {
-	private App app;
 	private ArrayList<GeoElement> geos;
+	private App app;
 
 	/**
 	 * Constructor for adding Group/Ungroup menu items

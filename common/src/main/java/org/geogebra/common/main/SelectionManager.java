@@ -1255,5 +1255,22 @@ public class SelectionManager {
 		}
 		return selectedGroups;
 	}
+
+	/**
+	 * Adds all the geos of the group, that the given geo belongs.
+	 * If geo has no group, it is added to the selection.
+	 *
+	 * @param geo to add with its group
+	 * @param repaint if repaint should needed.
+	 * @param updateSelection if update selection is needed.
+	 */
+	public void addSelectedGeoWithGroup(GeoElement geo, boolean repaint, boolean updateSelection) {
+		Group group = geo.getParentGroup();
+		if (group == null) {
+			addSelectedGeo(geo, repaint, updateSelection);
+		} else {
+			addSelectedGeos(group.getGroupedGeos(), repaint);
+		}
+	}
 }
 

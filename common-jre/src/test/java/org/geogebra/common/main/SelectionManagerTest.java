@@ -1,7 +1,10 @@
 package org.geogebra.common.main;
 
+import java.util.ArrayList;
+
 import org.geogebra.common.BaseUnitTest;
 import org.geogebra.common.kernel.geos.GeoElement;
+import org.geogebra.common.kernel.geos.GeoPolygon;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,5 +49,31 @@ public class SelectionManagerTest extends BaseUnitTest {
 		// next jumps bacck to first
 		selectionManager.selectNextGeo(getApp().getEuclidianView1());
 		Assert.assertTrue(firstVisible.isSelected());
+	}
+
+	@Test
+	public void selectAllIfGeoHasGroup() {
+		ArrayList<GeoElement> geos = geosForGroup();
+		getKernel().getConstruction().createGroup(geos);
+		selectionManager.addSelectedGeoWithGroup(geos.get(0), false, false);
+		Assert.assertArrayEquals(geos.toArray(), selectionManager.getSelectedGeos().toArray());
+	}
+
+	@Test
+	public void selectGeoIfNoGroup() {
+		GeoElement geo = new GeoPolygon(getKernel().getConstruction());
+		selectionManager.addSelectedGeoWithGroup(geo, false, false);
+		Assert.assertArrayEquals(new GeoElement[] {geo}, selectionManager.getSelectedGeos().toArray());
+	}
+
+
+	private ArrayList<GeoElement> geosForGroup() {
+		ArrayList<GeoElement> geos = new ArrayList<>();
+		for (int i = 0; i < 5; i++ ) {
+			GeoPolygon polygon = new GeoPolygon(getKernel().getConstruction());
+			polygon.setLabel("label" + i);
+			geos.add(polygon);
+		}
+		return geos;
 	}
 }
